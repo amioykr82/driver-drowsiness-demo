@@ -2,7 +2,7 @@ opencv-python-headless
 numpy
 streamlit
 pyttsx3
-mediapipe==0.10.13
+mediapipe==0.10.11
 Pillow
 deepface
 torch
