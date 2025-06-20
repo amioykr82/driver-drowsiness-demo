@@ -7,4 +7,3 @@ Pillow
 deepface
 torch
 tensorflow-cpu
-protobuf==3.20.2
