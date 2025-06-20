@@ -1,0 +1,9 @@
+opencv-python
+numpy
+streamlit
+pyttsx3
+mediapipe
+Pillow
+deepface
+torch
+tf-keras
