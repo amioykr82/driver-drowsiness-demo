@@ -6,4 +6,4 @@ mediapipe
 Pillow
 deepface
 torch
-tf-keras
+tensorflow
