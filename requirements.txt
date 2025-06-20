@@ -9,3 +9,4 @@ torch
 tensorflow-cpu
 tf-keras
 streamlit-webrtc
+aioice==0.7.5
