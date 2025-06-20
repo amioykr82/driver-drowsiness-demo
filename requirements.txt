@@ -8,3 +8,4 @@ deepface
 torch
 tensorflow-cpu
 tf-keras
+streamlit-webrtc

@@ -8,6 +8,7 @@ import tempfile
 import threading
 import time
 from drowsiness_detection import AdvancedDrowsinessDetector
+from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 
 # --- Branding and Config ---
 st.set_page_config(page_title="Driver Drowsiness Detection Demo", page_icon="🚗", layout="wide")
@@ -184,4 +185,42 @@ elif page == "Contact":
     st.header("Contact & Demo Requests")
     st.write("For demo requests, partnerships, or investment opportunities:")
     st.markdown("**Email:** amioy.iitd@gmail.com")
-    st.markdown("**LinkedIn:** [Your LinkedIn](https://www.linkedin.com/in/amioykr/)") 
+    st.markdown("**LinkedIn:** [Your LinkedIn](https://www.linkedin.com/in/amioykr/)")
+
+# --- Drowsiness Detector Instance ---
+if 'ai_detector' not in st.session_state:
+    st.session_state['ai_detector'] = AdvancedDrowsinessDetector()
+
+def process_drowsiness(img):
+    # Run your drowsiness detection logic here
+    is_drowsy, ear, emotion, error = st.session_state['ai_detector'].detect_drowsiness(img)
+    # Draw result on frame
+    h, w, _ = img.shape
+    color = (0, 0, 255) if is_drowsy else (0, 255, 0)
+    label = f"Drowsy! EAR={ear:.2f}" if is_drowsy else f"Alert EAR={ear:.2f}"
+    cv2.putText(img, label, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
+    return img
+
+class VideoTransformer(VideoTransformerBase):
+    def __init__(self):
+        pass
+    def transform(self, frame):
+        img = frame.to_ndarray(format="bgr24")
+        img = process_drowsiness(img)
+        return img
+
+# --- WebRTC Streamer ---
+webrtc_streamer(
+    key="drowsiness-detection",
+    video_transformer_factory=VideoTransformer,
+    rtc_configuration={
+        "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+    },
+    media_stream_constraints={"video": True, "audio": False},
+)
+
+st.sidebar.title("About")
+st.sidebar.info(
+    "This app uses computer vision to detect drowsiness. "
+    "Your webcam feed is processed in real-time and is not stored or recorded."
+) 
