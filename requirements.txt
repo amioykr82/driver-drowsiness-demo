@@ -7,3 +7,4 @@ Pillow
 deepface
 torch
 tensorflow-cpu
+tf-keras
