@@ -4,6 +4,7 @@ pyttsx3==2.90
 mediapipe==0.10.21
 Pillow==10.0.1
 deepface==0.0.79
-tensorflow
+tensorflow==2.11.0
+keras==2.11.0
 numpy
 streamlit-webrtc==0.47.0
