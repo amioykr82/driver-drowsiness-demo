@@ -44,12 +44,10 @@ The app is designed for professional presentations, with a focus on reliability,
 .
 ├── frontend.py                # Main Streamlit application with WebRTC
 ├── drowsiness_detection.py    # Core drowsiness detection logic
-├── test_setup.py             # Setup verification script
-├── run_app.py                # Safe startup script
 ├── requirements.txt          # Python dependencies
 ├── packages.txt              # System dependencies for Streamlit Cloud
 ├── .gitignore               # Files/folders excluded from version control
-├── drowsienv/               # (Local) Python virtual environment (not tracked)
+
 ```
 
 ---
